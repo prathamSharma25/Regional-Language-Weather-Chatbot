@@ -100,7 +100,10 @@ def weather_info(query):
     weather_data = mgr.weather_at_place(user_city).weather
     forecast_3h = list(mgr.forecast_at_place(user_city, '3h').forecast)
 
-    index = queries.index(query)
+    if query in queries:
+        index = queries.index(query)
+    else:
+        index = -1
     if index==0:
         status = str(weather_data.detailed_status)
         current_temp = str(weather_data.temperature('celsius')['temp'])
@@ -155,7 +158,7 @@ def weather_info(query):
         result = "Time of sunrise tomorrow will be " + sunrise_time + "."
         return result
     else:
-        result = "I am sorry. I don't understand your question."
+        result = "I am sorry, I don't understand your question."
         return result
     
     
