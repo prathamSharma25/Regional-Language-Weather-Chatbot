@@ -149,12 +149,12 @@ def weather_info(query):
         result = ''
         return result
     elif index==8:
-        sunset_time_unix = weather_data.sunset_time() + 19800
+        sunset_time_unix = weather_data.sunset_time()
         sunset_time = str(datetime.fromtimestamp(sunset_time_unix).strftime('%H:%M:%S'))
         result = "Time of sunset today is " + sunset_time + "."
         return result
     elif index==9:
-        sunrise_time_unix = weather_data.sunrise_time() + 19800
+        sunrise_time_unix = weather_data.sunrise_time()
         sunrise_time = str(datetime.fromtimestamp(sunrise_time_unix).strftime('%H:%M:%S'))
         result = "Time of sunrise tomorrow will be " + sunrise_time + "."
         return result
