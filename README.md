@@ -3,7 +3,7 @@ This is a simple weather chatbot developed to address users' weather related que
 
 Users can ask simple weather related queries such as "What is the weather today?" in Gujarati and the chatbot answers the query with appropriate information.
 
-The chatbot can be set to handle user queries in any language, simply by changing the target language (target_lang) in the code.
+The chatbot can be set to handle user queries in any language, simply by changing the variable for target language (target_lang; currently set to 'gu' for Gujarati) in the code.
 
 ---
 
