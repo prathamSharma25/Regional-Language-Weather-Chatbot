@@ -32,12 +32,13 @@ queries = ['what is the weather today',
            'what time is the sunrise tomorrow']
 
 
-# Create Translator object for translation
+# Create Translator object for translation and set target language
 translator = Translator()
+target_lang = 'gu'
 
 
 # Configure PyOWM with OpenWeatherMap API key
-APIKEY = 'YOUR-OWM-API-KEY'
+APIKEY = '10dbd553835e62b02b7478f09c3963cc'
 owm = OWM(APIKEY)
 mgr = owm.weather_manager()
 
@@ -47,9 +48,9 @@ def translate_to_EN(user_query):
     return translator.translate(user_query, dest='en').text.lower()
 
 
-# Function to translate result to Gujarati
-def translate_to_GJ(result):
-    return translator.translate(result, dest='gu').text
+# Function to translate result to target language
+def translate_to_target_language(result):
+    return translator.translate(result, dest=target_lang).text
 
 
 # Function to remove punctuations, tokenize text and stem words in text
@@ -90,7 +91,7 @@ def most_similar_query(user_query_tokens):
 
 # Function to get user location through ipdata API
 def get_user_location():
-    ipdata = requests.get('https://api.ipdata.co?api-key=YOUR-IPDATA-API-KEY').json()
+    ipdata = requests.get('https://api.ipdata.co?api-key=c918a9b94660beb36abe7a90bcffd83c8cca33be36537e37c123000a').json()
     return ipdata['city']
 
 
@@ -113,15 +114,15 @@ def weather_info(query):
         result = status.capitalize() + " today. Current temperature is " + current_temp + " degrees celsius (Maximum: " + max_temp + "*C, Minimum: " + min_temp + "*C). Humidity today is " + humidity + "%."
         return result
     elif index==1: 
-        current_temp = weather_data.temperature('celsius')['temp']
+        current_temp = str(weather_data.temperature('celsius')['temp'])
         result = "The current temperature is " + current_temp + " degrees celsius."
         return result
     elif index==2:
-        max_temp = weather_data.temperature('celsius')['temp_max']
+        max_temp = str(weather_data.temperature('celsius')['temp_max'])
         result = "The maximum temperature today is " + max_temp + " degrees celsius."
         return result
     elif index==3:
-        min_temp = weather_data.temperature('celsius')['temp_min']
+        min_temp = str(weather_data.temperature('celsius')['temp_min'])
         result = "The minimum temperature today is " + min_temp + " degrees celsius."
         return result
     elif index==4:
@@ -164,13 +165,13 @@ def weather_info(query):
     
 # Function to greet user at start of chat
 def greet():
-    greeting = translator.translate("Hello! I am your weather assistant. \nAsk me queries related to weather. \nTo end this chat, say 'goodbye'.", dest='gu').text
+    greeting = translator.translate("Hello! I am your weather assistant. \nAsk me queries related to weather. \nTo end this chat, say 'goodbye'.", dest=target_lang).text
     print('\n', greeting)
     
 
 # Function to say goodbye to user at end of chat
 def goodbye():
-    goodbye = translator.translate("Goodbye! Have a nice day!", dest='gu').text
+    goodbye = translator.translate("Goodbye! Have a nice day!", dest=target_lang).text
     print('\n', goodbye)
     
 
@@ -179,7 +180,7 @@ def run():
     talking = True
     greet()
     while(talking):
-        prompt = translator.translate("Ask your query here", dest='gu').text
+        prompt = translator.translate("Ask your query here", dest=target_lang).text
         user_query_GJ = input(prompt + ": ")
         user_query_EN = translate_to_EN(user_query_GJ)
         if user_query_EN=='goodbye' or user_query_EN=='see you soon':
@@ -188,7 +189,7 @@ def run():
         else:
             user_query_EN_tokens = remove_stopwords(tokenize(user_query_EN))
             chatbot_query = most_similar_query(user_query_EN_tokens)
-            output = translate_to_GJ(weather_info(chatbot_query))
+            output = translate_to_target_language(weather_info(chatbot_query))
             print(output)
     goodbye()
     return
