@@ -38,7 +38,7 @@ target_lang = 'gu'
 
 
 # Configure PyOWM with OpenWeatherMap API key
-APIKEY = '10dbd553835e62b02b7478f09c3963cc'
+APIKEY = 'YOUR-OWM-API-KEY'
 owm = OWM(APIKEY)
 mgr = owm.weather_manager()
 
@@ -91,7 +91,7 @@ def most_similar_query(user_query_tokens):
 
 # Function to get user location through ipdata API
 def get_user_location():
-    ipdata = requests.get('https://api.ipdata.co?api-key=c918a9b94660beb36abe7a90bcffd83c8cca33be36537e37c123000a').json()
+    ipdata = requests.get('https://api.ipdata.co?api-key=YOUR-IPDATA-API-KEY').json()
     return ipdata['city']
 
 
