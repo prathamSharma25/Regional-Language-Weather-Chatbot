@@ -1,5 +1,6 @@
 body {
     font-family: Garamond;
+    background-color: #d0e3fb;
 }
 
 h1 {
@@ -99,11 +100,23 @@ button, input, optgroup, select, textarea {
     line-height: inherit;
     overflow:visible;
 }
+
+#chat-header{
+    background-color: #e9e9eb;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3px;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-color: grey;
+    text-align: center;
+}
+
 #chatbox {
     background-color: #ffffff;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 85%;
     min-height: 70px;
     margin-top: 60px;
 }
@@ -111,7 +124,7 @@ button, input, optgroup, select, textarea {
 #userInput {
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+    width: 60%;
     margin-top: 60px;
 }
 
@@ -135,7 +148,6 @@ button, input, optgroup, select, textarea {
     font-size: 17px;
     text-align: right !important;
     line-height: 30px;
-    margin: 5px;
 }
 
 .userText span {
@@ -151,7 +163,6 @@ button, input, optgroup, select, textarea {
     font-size: 17px;
     text-align: left !important;
     line-height: 30px;
-    margin: 5px;
 }
 
 .botText span {
@@ -166,4 +177,17 @@ button, input, optgroup, select, textarea {
     bottom: 0;
     right: 0;
     width: 300px;
+}
+
+form{
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    border-right: 2px solid;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    border-color: grey;
+    padding-top: 1px;
+    padding-bottom: 30px;
 }
