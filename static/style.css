@@ -102,10 +102,10 @@ button, input, optgroup, select, textarea {
 }
 
 #chat-header{
-    background-color: #e9e9eb;
+    background-color: #f4f4f4;
     margin-left: auto;
     margin-right: auto;
-    padding: 3px;
+    padding-bottom: 3px;
     border-top: 2px solid;
     border-bottom: 2px solid;
     border-color: grey;
@@ -190,4 +190,9 @@ form{
     border-color: grey;
     padding-top: 1px;
     padding-bottom: 30px;
+}
+
+img{
+    border-radius: 50%;
+    align-items: center;
 }
