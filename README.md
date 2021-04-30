@@ -6,7 +6,6 @@ Users can ask simple weather related queries such as "What is the weather today?
 The chatbot can be set to handle user queries in any language, simply by changing the variable for target language (target_lang; currently set to 'gu' for Gujarati) in the code.
 
 ### User Interface
-![Chatbot User Interface](chatbot_ui.png)
 
 ---
 
