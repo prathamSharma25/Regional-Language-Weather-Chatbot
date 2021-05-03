@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar 28 10:57:59 2021
-
-@author: Pratham
-"""
-
-
 # Import required libraries
 from googletrans import Translator
 import nltk
@@ -15,8 +7,8 @@ from nltk.stem import PorterStemmer
 import string
 from pyowm import OWM
 from datetime import datetime
-import requests
-import json
+import ipinfo
+from flask import request
 
 
 # Predefined queries for chatbot
@@ -83,16 +75,16 @@ def most_similar_query(user_query_tokens):
     return most_sim_query
 
 
-# Function to get user location through ipdata API
+# Function to get user location using ipinfo and flask.request
 def get_user_location():
-    api_key = 'YOUR-IPDATA-API-KEY'
-    ipdata = requests.get('https://api.ipdata.co?api-key=' + api_key).json()
-    return ipdata['city']
+    handler = ipinfo.getHandler('YOUR-IPINFO-API-KEY')
+    ip_user = request.headers['X-Real-IP']
+    details = handler.getDetails(ip_user)
+    return details.city
 
 
 # Configure PyOWM with OpenWeatherMap API key
-APIKEY = 'YOUR-OWM-API-KEY'
-owm = OWM(APIKEY)
+owm = OWM('YOUR-OWM-API-KEY')
 mgr = owm.weather_manager()
 
 
@@ -114,7 +106,7 @@ def weather_info(query):
         humidity = str(weather_data.humidity)
         result = status.capitalize() + " today. Current temperature is " + current_temp + " degrees celsius (Maximum: " + max_temp + "*C, Minimum: " + min_temp + "*C). Humidity today is " + humidity + "%."
         return result
-    elif index==1: 
+    elif index==1:
         current_temp = str(weather_data.temperature('celsius')['temp'])
         result = "The current temperature is " + current_temp + " degrees celsius."
         return result
@@ -151,30 +143,18 @@ def weather_info(query):
         return result
     elif index==8:
         sunset_time_unix = weather_data.sunset_time()
-        sunset_time = str(datetime.fromtimestamp(sunset_time_unix).strftime('%H:%M:%S'))
+        sunset_time = str(datetime.fromtimestamp(sunset_time_unix + 19800).strftime('%H:%M:%S'))
         result = "Time of sunset today is " + sunset_time + "."
         return result
     elif index==9:
         sunrise_time_unix = weather_data.sunrise_time()
-        sunrise_time = str(datetime.fromtimestamp(sunrise_time_unix).strftime('%H:%M:%S'))
+        sunrise_time = str(datetime.fromtimestamp(sunrise_time_unix + 19800).strftime('%H:%M:%S'))
         result = "Time of sunrise tomorrow will be " + sunrise_time + "."
         return result
     else:
         result = "I am sorry, I don't understand your question."
         return result
-    
-    
-# Function to greet user at start of chat
-def greet():
-    greeting = translator.translate("Hello! I am your weather assistant. \nAsk me queries related to weather. \nTo end this chat, say 'goodbye'.", dest=target_lang).text
-    print('\n', greeting)
-    
 
-# Function to say goodbye to user at end of chat
-def goodbye():
-    goodbye = translator.translate("Goodbye! Have a nice day!", dest=target_lang).text
-    print('\n', goodbye)
-    
 
 # Function to get response from chatbot
 def get_response(message):
