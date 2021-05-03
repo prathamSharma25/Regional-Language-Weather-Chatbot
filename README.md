@@ -5,6 +5,8 @@ Users can ask simple weather related queries such as "What is the weather today?
 
 The chatbot can be set to handle user queries in any language, simply by changing the variable for target language (target_lang; currently set to 'gu' for Gujarati) in the code.
 
+The chatbot is deployed [here](https://weatherplus.pythonanywhere.com/). The code can be used to deploy a similar chatbot application on pythonanywhere.com.
+
 ### User Interface
 ![Chatbot User Interface](user_interface.png)
 
